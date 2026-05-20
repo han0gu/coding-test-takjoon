@@ -27,8 +27,7 @@ def paint(x, y):
     for i in range(x, x + 10):
         # paint y ~ y+9, 색칠되어 있지 않은 경우만
         for j in range(y, y + 10):
-            if matrix[i][j] == 0:
-                matrix[i][j] = 1
+            matrix[i][j] = 1
 
 
 # paint 실행
@@ -36,7 +35,5 @@ for x, y in papers:
     paint(x, y)
 
 # 정답 계산
-answer = 0
-for i in range(100):
-    answer += sum(matrix[i])
+answer = sum(sum(row) for row in matrix)
 print(answer)
