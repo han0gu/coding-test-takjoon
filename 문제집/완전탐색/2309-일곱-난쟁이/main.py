@@ -12,28 +12,28 @@ python3 '문제집/완전탐색/2309-일곱-난쟁이/main.py' << 'EOF'
 EOF
 """
 
-import random
-
+"""
+입력 9명
+정답 7명
+합 100
+무조건 정답 있음
+"""
 dwarfs = [int(input()) for _ in range(9)]
 
-while True:
-    flag = False
-    answer = []
-    random.shuffle(dwarfs)
+flag = False
+for i in range(9):
+    exclude_1 = dwarfs[:i] + dwarfs[i+1:]
+    sum_exclude_1 = sum(exclude_1)
+    
+    for j in range(8):
+        if sum_exclude_1 - exclude_1[j] == 100:
+            exclude_2 = exclude_1[:j] + exclude_1[j+1:]
+            exclude_2.sort()
+            
+            for d in exclude_2:
+                print(d)
 
-    for d in dwarfs:
-        if sum(answer) + d > 100:
-            break
-
-        answer.append(d)
-        
-        if sum(answer) == 100 and len(answer) == 7:
             flag = True
             break
-
     if flag:
-        answer.sort()
-        for i in answer:
-            print(i)
         break
-    
