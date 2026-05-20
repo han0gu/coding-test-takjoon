@@ -13,8 +13,8 @@ n, k = map(int, input().split())
 temperatures = list(map(int, input().split()))
 # print("temperatures", temperatures)
 
-max = -101
-for i in range(n-k+1):
+max = sum(temperatures[:k])
+for i in range(1, n-k+1):
     temp_sum = sum(temperatures[i:i+k])
     if max < temp_sum:
         max = temp_sum
