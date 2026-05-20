@@ -9,8 +9,8 @@ EOF
 
 모두 자연수 개의 사탕을 받음
 
-택희 = 짝수(최소 2개)
-남규 >= 영훈 + 2
+택희(a) = 짝수(최소 2개)
+남규(c) >= 영훈(b) + 2
 """
 n = int(input())
 
@@ -21,19 +21,16 @@ elif n == 6:
 else:
     answer_count = 0
 
-    # 택희 먼저 결정
+    # 택희(a) 먼저 결정
     for a in range(2, n, 2):
         exclude_a = n - a
 
-        # 남규 + 영훈의 최소값은 4이므로
-        if exclude_a < 4:
-            continue
-
-        # 남규/영훈 계산
-        for b in range(exclude_a - 1, 2, -1):
+        # 영훈(b)
+        for b in range(1, exclude_a):
+            # 남규(c)
             c = exclude_a - b
 
-            if b >= c + 2:
+            if c >= b + 2:
                 answer_count += 1
 
     print(answer_count)
