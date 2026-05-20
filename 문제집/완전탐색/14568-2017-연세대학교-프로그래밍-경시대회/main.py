@@ -16,25 +16,24 @@ n = int(input())
 
 if n < 6:
     print(0)
-if n == 6:
+elif n == 6:
     print(1)
-if n > 6:
-    answer = []
+else:
+    answer_count = 0
 
     # 택희 먼저 결정
-    for i in range(1, int(n/2)):
-        a = i*2
+    for a in range(2, n, 2):
         exclude_a = n - a
 
-        # 남규 + 영훈의 최소값은 3이므로
-        if exclude_a < 3:
+        # 남규 + 영훈의 최소값은 4이므로
+        if exclude_a < 4:
             continue
 
         # 남규/영훈 계산
         for b in range(exclude_a - 1, 2, -1):
             c = exclude_a - b
-            
-            if b >= c + 2:
-                answer.append([a, b, c])
 
-    print(len(answer))
+            if b >= c + 2:
+                answer_count += 1
+
+    print(answer_count)
