@@ -13,4 +13,4 @@ for _ in range(k):
     else:
         m -= 1
 
-print(min(int(n / 2), m))
+print(min(n//2, m))
