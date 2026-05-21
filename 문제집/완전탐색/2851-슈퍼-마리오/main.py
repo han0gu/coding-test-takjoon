@@ -1,6 +1,6 @@
 """
 총 10개의 입력
-모두 양의 정수
+각 입력 값 1~100
 """
 
 """
@@ -42,26 +42,13 @@ python3 문제집/완전탐색/2851-슈퍼-마리오/main.py << "EOF"
 40
 40
 EOF
-
-python3 문제집/완전탐색/2851-슈퍼-마리오/main.py << "EOF"
-200
-200
-200
-200
-200
-200
-200
-200
-200
-200
-EOF
 """
 inputs = [int(input()) for _ in range(10)]
 # print("inputs", inputs)
 
 TARGET = 100
 answer_under = 0
-answer_over = 0
+answer_over = None
 for n in inputs:
     if answer_under + n <= TARGET:
         answer_under += n
@@ -69,7 +56,10 @@ for n in inputs:
         answer_over = answer_under + n
         break
 
-if TARGET - answer_under < answer_over - TARGET:
+if not answer_over:
     print(answer_under)
 else:
-    print(answer_over)
+    if TARGET - answer_under < answer_over - TARGET:
+        print(answer_under)
+    else:
+        print(answer_over)
