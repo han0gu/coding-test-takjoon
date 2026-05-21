@@ -8,21 +8,16 @@
 a, b, c, n = map(int, input().split())
 
 flag = False
-for i in range(n // a + 1):
-    if flag:
-        break
-    
-    for j in range(n // b + 1):
-        if flag:
-            break
 
+for i in range(n // a + 1):
+    for j in range(n // b + 1):
         for k in range(n//c + 1):
+            flag = a*i + b*j + c*k == n
             if flag:
                 break
+        if flag:
+            break
+    if flag:
+        break
 
-            flag = a*i + b*j + c*k == n
-
-if flag:
-    print(1)
-else:
-    print(0)
+print(1 if flag else 0)
