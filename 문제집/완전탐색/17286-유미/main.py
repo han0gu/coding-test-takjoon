@@ -4,12 +4,16 @@
 -10 <= x,y <= 10
 """
 import math
-from itertools import permutations
 
 dot_coordinates = [list(map(int,input().split())) for _ in range(4)]
 # print(dot_coordinates)
 
-visit_orders = [[0] + list(order) for order in permutations([1,2,3])]
+visit_orders = []
+for a in [1,2,3]:
+    for b in [1,2,3]:
+        for c in [1,2,3]:
+            if a != b and b != c and c != a:
+                visit_orders.append([0] + [a,b,c])
 
 def calculate_distance(visit_order):
     distance = 0
