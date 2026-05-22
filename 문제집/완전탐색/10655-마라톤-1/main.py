@@ -21,7 +21,7 @@ for i in range(1, n):
 
 # 제외할 체크포인트 인덱스
 answer = no_exclude
-for i in range(1, n-1): 
+for i in range(1, n-1):
     exclude = get_distance(checkpoints[i-1], checkpoints[i]) + get_distance(checkpoints[i], checkpoints[i+1])
     include = get_distance(checkpoints[i-1], checkpoints[i+1])
 
