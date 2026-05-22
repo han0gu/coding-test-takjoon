@@ -8,24 +8,17 @@ flowers = [k] * n
 
 day = 0
 water_start = 0
-water_end = water_start + a - 1
 while 0 not in flowers:
     day += 1
 
-    water_start %= n
-    water_end %= n
-    if water_start != water_end:
-        for i in range(water_start, water_end + 1):
-            flowers[i] += b
-    else:
-        flowers[water_start] += b
+    for i in range(water_start, water_start + a):
+        flowers[i] += b
 
     flowers = [f - 1 for f in flowers]
 
-    # print(day, water_start, water_end, flowers)
+    # print(day, water_start, flowers)
 
-    water_start += a
-    water_end += a
+    water_start = (water_start + a) % n
 
 print(day)
 
