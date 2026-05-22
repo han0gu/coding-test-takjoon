@@ -10,21 +10,21 @@
 n = int(input())
 
 checkpoints = [tuple(map(int, input().split())) for _ in range(n)]
-# print('checkpoints', checkpoints)
 
-answer = float('inf')
+def get_distance(p1: tuple, p2: tuple) -> int:
+    return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
-# 제외할 체크포인터 인덱스
+# 모두 방문할 경우 거리 계산
+no_exclude = 0
+for i in range(1, n):
+    no_exclude += get_distance(checkpoints[i - 1], checkpoints[i])
+
+# 제외할 체크포인트 인덱스
+answer = no_exclude
 for i in range(1, n-1): 
-    targets = checkpoints[:i] + checkpoints[i + 1:]
+    exclude = get_distance(checkpoints[i-1], checkpoints[i]) + get_distance(checkpoints[i], checkpoints[i+1])
+    include = get_distance(checkpoints[i-1], checkpoints[i+1])
 
-    # 거리 계산
-    tmp_sum = 0
-    for j in range(1, len(targets)):
-        prev = targets[j - 1]
-        cur = targets[j]
-        tmp_sum += abs(prev[0] - cur[0]) + abs(prev[1] - cur[1])
-
-    answer = min(answer, tmp_sum)
+    answer = min(answer, no_exclude - exclude + include)
 
 print(answer)
