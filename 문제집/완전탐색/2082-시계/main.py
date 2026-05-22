@@ -25,10 +25,8 @@ for row in range(5):
     input_number_4.append(raw_inputs[row][3])
 # print('input_number_1', input_number_1)
 
-answer = []
-
 def validate(input_number):
-    for i in range(9):
+    for i in range(10):
         target_number = numbers[i]
         flag = True
 
@@ -41,13 +39,13 @@ def validate(input_number):
         # print(i, input_number_2, target_number, flag)    
 
         if flag:
-            answer.append(str(i))
-            return
+            return str(i)
 
-validate(input_number_1)
-validate(input_number_2)
-validate(input_number_3)
-validate(input_number_4)
+answer = []
+answer.append(validate(input_number_1))
+answer.append(validate(input_number_2))
+answer.append(validate(input_number_3))
+answer.append(validate(input_number_4))
 print(f"{''.join(answer[:2])}:{''.join(answer[2:])}")
 
 
