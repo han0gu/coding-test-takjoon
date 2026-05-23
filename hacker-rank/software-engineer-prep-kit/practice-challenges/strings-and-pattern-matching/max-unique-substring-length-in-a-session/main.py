@@ -22,10 +22,10 @@ def maxDistinctSubstringLengthInSessions(sessionString):
         
         for c in string:
             if c in visited:
-                answer = max(answer, len(visited))
                 break
             visited.append(c)
         
+        answer = max(answer, len(visited))
         # print('visited', visited, answer)
         
     return answer
