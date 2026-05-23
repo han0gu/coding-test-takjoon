@@ -9,34 +9,24 @@
 
 def mergeHighDefinitionIntervals(intervals):
     # print('intervals', intervals)
-    
+
     if not intervals:
         return []
-    
-    for i in intervals:
-        i.sort()
-        
+
     intervals.sort(key=lambda x: x[0])
     # print('sorted', intervals)
-    
+
     answer = [intervals[0]]
-    for i in range(1, len(intervals)):
-        cur = intervals[i]
-        cur_start = cur[0]
-        cur_end = cur[1]
-        # print('cur', cur_start, cur_end)
-        
+    for cur_start, cur_end in intervals[1:]:
         target = answer[-1]
-        target_start = target[0]
-        target_end = target[1]
-        # print('target', target_start, target_end)
-        
+        _, target_end = target
+
         if cur_start <= target_end:
-            answer[-1] = [target_start, max(target_end, cur_end)]
+            answer[-1][1] = max(target_end, cur_end)
             # print('new target', target)
         else:
-            answer.append(cur)
-            
+            answer.append([cur_start, cur_end])
+
     return answer
 
 if __name__ == '__main__':
