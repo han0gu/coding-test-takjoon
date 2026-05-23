@@ -12,29 +12,17 @@ numbers = list(map(int, input().split()))
 # print('numbers', numbers)
 
 answer = 0
-start = 0
 end = 0
-while start <= end and end <= n - 1:
-    total = sum(numbers[start:end+1])
+total = 0
 
-    if start == end:
-        if total == m:
-            answer += 1
-            start += 1
-            end += 1
-        elif total > m:
-            start += 1
-            end += 1
-        else:
-            end += 1
-    else:
-        if total == m:
-            answer += 1
-            start += 1
-            end += 1
-        elif total > m:
-            start += 1
-        else:
-            end += 1
+for start in range(n):
+    while end < n and total < m:
+        total += numbers[end]
+        end += 1
+
+    if total == m:
+        answer += 1
+
+    total -= numbers[start]
 
 print(answer)
