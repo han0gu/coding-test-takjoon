@@ -10,27 +10,23 @@
 #
 
 def getTopKFrequentEvents(events, k):
-    
+
     if not events or k == 0:
         return []
-        
-    # visited = [] # order
-    cnt_map = {} # count
-    for e in events:
-        # if e not in visited:
-        #     visited.append(e)
-            
-        if e not in cnt_map:
-            cnt_map[e] = 1
+
+    event_count = {}
+    first_seen_index = {}
+
+    for i, e in enumerate(events):
+        if e not in event_count:
+            event_count[e] = 1
+            first_seen_index[e] = i
         else:
-            cnt_map[e] += 1
-    # print('visited', visited)
-    # print('cnt_map', cnt_map)
-    
-    sorted_cnt_map = sorted(cnt_map, key=lambda x: cnt_map[x], reverse=True)
-    # print('sorted_cnt_map', sorted_cnt_map)
-            
-    return sorted_cnt_map[:k]
+            event_count[e] += 1
+
+    sorted_events = sorted(event_count, key=lambda e: (-event_count[e], first_seen_index[e]))
+
+    return sorted_events[:k]
 
 if __name__ == '__main__':
     events_count = int(input().strip())
