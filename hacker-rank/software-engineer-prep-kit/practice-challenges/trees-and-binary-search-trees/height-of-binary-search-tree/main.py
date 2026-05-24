@@ -10,17 +10,17 @@
 #  3. INTEGER_ARRAY rightChild
 #
 
-def go_left(idx, cur_depth):
-    if leftChild[idx] == -1:
+def go_down(idx, cur_depth):
+    if leftChild[idx] == -1 and rightChild[idx] == -1:
         return cur_depth
-        
-    return max(go_left(leftChild[idx], cur_depth + 1), go_right(rightChild[idx], cur_depth + 1))
+    elif leftChild[idx] != -1 and rightChild[idx] != -1:
+        return max(go_down(leftChild[idx], cur_depth + 1), go_down(rightChild[idx], cur_depth + 1))
+    elif rightChild[idx] != -1:
+        return go_down(rightChild[idx], cur_depth + 1)
+    else:
+        return go_down(leftChild[idx], cur_depth + 1)
+          
     
-def go_right(idx, cur_depth):
-    if rightChild[idx] == -1:
-        return cur_depth
-        
-    return max(go_left(leftChild[idx], cur_depth + 1), go_right(rightChild[idx], cur_depth + 1))
 
 def getBinarySearchTreeHeight(values, leftChild, rightChild):
     # print('values', values)
@@ -30,7 +30,7 @@ def getBinarySearchTreeHeight(values, leftChild, rightChild):
     if len(values) <= 1:
         return len(values)
     
-    return max(go_left(0, 1), go_right(0, 1))
+    return go_down(0, 1)
     
 
 if __name__ == '__main__':
