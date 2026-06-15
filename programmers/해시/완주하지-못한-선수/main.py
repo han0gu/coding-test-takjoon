@@ -4,8 +4,14 @@ def solution(participant, completion):
     c1 = Counter(participant)
     c2 = Counter(completion)
     
-    for key in c1:
-        v1 = c1[key]
-        v2 = c2[key]
-        if v1 != v2:
-            return key
+    diff = c1 - c2
+    # print('diff', diff)
+    
+    keys = diff.keys()
+    # print('keys', keys)
+
+    return list(keys)[0]
+        
+p = ["leo", "kiki", "eden"]
+c = ["eden", "kiki"]
+solution(p, c)
