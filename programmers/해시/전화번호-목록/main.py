@@ -1,7 +1,5 @@
-from collections import Counter
-
 def solution(phone_book):
-    prefix_candidates = Counter(phone_book)
+    prefix_candidates = set(phone_book)
     # print('prefix_candidates', prefix_candidates)
     
     for p in phone_book:
