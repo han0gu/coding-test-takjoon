@@ -1,13 +1,12 @@
+from collections import Counter
+
 def solution(phone_book):
-    len_phone_book = len(phone_book)
-    phone_book.sort()
+    prefix_candidates = Counter(phone_book)
+    # print('prefix_candidates', prefix_candidates)
     
-    for i in range(len_phone_book-1):
-        for j in range(i+1, len_phone_book):
-            v1 = phone_book[i]
-            v2 = phone_book[j]
-            
-            if v2.startswith(v1):
+    for p in phone_book:
+        for i in range(1, len(p)):
+            if p[0:i] in prefix_candidates:
                 return False
-            
+    
     return True
