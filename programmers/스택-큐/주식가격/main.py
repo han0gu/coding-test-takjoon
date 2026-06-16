@@ -4,7 +4,7 @@
 가격이 떨어지지 않은 인덱스들은 나중에 한번에 역산할 수 있다 -> 가격이 떨어지는 순간 즉시 계산/업데이트 한다
 """
 def solution(prices):
-    answer = [0] * len(prices)
+    answer = [len(prices) - 1 - i for i in range(len(prices))] # 가격이 떨어진 인덱스만 업데이트 하기 위한 초기화
     remain_indices = [] # 아직 가격이 떨어지지 않은 인덱스들
     
     for i, p in enumerate(prices):
@@ -14,8 +14,5 @@ def solution(prices):
             answer[top] = i - top
         
         remain_indices.append(i)
-    
-    for i in remain_indices:
-        answer[i] = len(prices) - 1 - i
         
     return answer
