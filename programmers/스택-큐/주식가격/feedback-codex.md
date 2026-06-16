@@ -7,9 +7,9 @@
 - 가격이 떨어지는 바로 그 순간도 경과 시간에 포함한다.
 - `prices`의 길이는 2 이상 100,000 이하이다.
 
-## 현재 풀이 요약
+## 처음 풀이 요약
 
-현재 `main.py`는 완전탐색으로 작성되어 있다.
+처음 `main.py`는 완전탐색으로 작성되어 있었다.
 
 ```python
 def solution(prices):
@@ -30,7 +30,7 @@ def solution(prices):
     return answer
 ```
 
-## 현재 풀이에서 좋은 점
+## 처음 풀이에서 좋은 점
 
 - 문제 설명과 거의 같은 흐름이라 이해하기 쉽다.
 - 각 시점 `i`마다 오른쪽을 보며 처음 가격이 떨어지는 순간까지 센다.
@@ -47,7 +47,7 @@ prices=[1, 2, 3, 4] -> [3, 2, 1, 0]
 prices=[4, 3, 2, 1] -> [1, 1, 1, 0]
 ```
 
-## 아쉬운 점
+## 처음 풀이의 아쉬운 점
 
 완전탐색은 직관적이지만 최악의 경우 `O(n^2)`이다.
 
@@ -58,6 +58,32 @@ prices = [1, 2, 3, 4, 5, ...]
 ```
 
 이 문제는 `prices` 길이가 최대 100,000이므로, 최악의 경우 완전탐색은 시간 초과 위험이 크다.
+
+## 현재 풀이 요약
+
+현재 `main.py`는 위 피드백을 반영해 단조 스택으로 작성되어 있다.
+
+```python
+def solution(prices):
+    answer = [0] * len(prices)
+    remain_indices = []
+
+    for i, p in enumerate(prices):
+        while remain_indices and prices[remain_indices[-1]] > p:
+            top = remain_indices.pop()
+            answer[top] = i - top
+
+        remain_indices.append(i)
+
+    for i in remain_indices:
+        answer[i] = len(prices) - 1 - i
+
+    return answer
+```
+
+- 각 인덱스는 스택에 한 번 들어가고 최대 한 번만 빠진다.
+- 따라서 전체 시간 복잡도는 `O(n)`이다.
+- 결과 배열과 스택을 사용하므로 공간 복잡도는 `O(n)`이다.
 
 ## 스택 풀이의 핵심 아이디어
 
