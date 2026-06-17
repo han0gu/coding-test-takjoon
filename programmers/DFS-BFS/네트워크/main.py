@@ -16,7 +16,7 @@ def solution(n, computers):
     for i in range(n):
         if visited[i]:
             continue
-        
+
         # 시작점 처리
         q.append(i)
         visited[i] = True
