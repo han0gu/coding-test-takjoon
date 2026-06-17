@@ -17,15 +17,16 @@ def solution(n, computers):
         # 시작점 처리
         if not visited[i]:
             q.append(i)
+            visited[i] = True
             answer += 1
             
         # 인접 노드 처리
         while q:
             cur_node = q.popleft()
-            visited[cur_node] = True
             
             for j in range(n):
-                if cur_node != j and not visited[j] and computers[cur_node][j] == 1:
+                if not visited[j] and computers[cur_node][j] == 1:
                     q.append(j)
+                    visited[j] = True
     
     return answer
