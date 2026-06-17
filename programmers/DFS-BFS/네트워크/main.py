@@ -14,11 +14,13 @@ def solution(n, computers):
     q = deque()
 
     for i in range(n):
+        if visited[i]:
+            continue
+        
         # 시작점 처리
-        if not visited[i]:
-            q.append(i)
-            visited[i] = True
-            answer += 1
+        q.append(i)
+        visited[i] = True
+        answer += 1
 
         # 인접 노드 처리
         while q:
