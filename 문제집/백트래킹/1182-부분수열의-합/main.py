@@ -3,17 +3,17 @@ nums = list(map(int, input().split()))
 
 answer = 0
 
-stack = [(0, nums[0]), (0, 0)]
+stack = [(0, 0, 0)] # (index, current_sum, selected_count)
 
 while stack:
-    idx, value = stack.pop()
+    idx, value, count = stack.pop()
 
-    if idx == n-1:
-        if value == target:
+    if idx == n:
+        if value == target and count > 0:
             answer += 1
         continue
-    
-    stack.append( (idx + 1, value + nums[idx+1]) )
-    stack.append( (idx + 1, value) )
-    
-print(answer if target != 0 else answer - 1)
+
+    stack.append((idx + 1, value + nums[idx], count + 1))
+    stack.append((idx + 1, value, count))
+
+print(answer)
