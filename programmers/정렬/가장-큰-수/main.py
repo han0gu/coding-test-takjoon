@@ -1,17 +1,7 @@
 from functools import cmp_to_key
 
 def compare(s1, s2):
-    l1 = len(s1)
-    l2 = len(s2)
-    
-    if l1 == l2:
-        return int(s1) - int(s2)
-    elif l1 > l2:
-        s2 += s2[-1] * (l1 - l2)
-        return int(s1) - int(s2)
-    else:
-        s1 += s1[-1] * (l2 - l1)
-        return int(s1) - int(s2)
+    return int(s1 + s2) - int(s2 + s1)
 
 def solution(numbers):
     ls = [str(x) for x in numbers]
