@@ -1,10 +1,9 @@
 def solution(citations):
-    # 역순으로 정렬
+    n = len(citations)
     citations.sort(reverse=True)
     
-    for _, v in enumerate(citations):
-        # 현재 값을 인덱스로 하는 원소의 값이 현재 값 이상이라면 return
-        if len(citations) >= v and citations[v-1] >= v:
-            return v
+    for i in range(n, 0, -1):
+        if citations[i-1] >= i:
+            return i
     
     return 0
