@@ -1,55 +1,31 @@
-# 선택 가능 여부 판단
-def can_handle(idx, need, limit, occupied):
-    for i in range(idx, idx + need):
-        if i in occupied:
-            return False
-    
-    return idx + need <= limit
-
-    
-
 n = int(input())
 candidates = [tuple(map(int, input().split())) for _ in range(n)] # need, profit
 
 answer = 0
-stack = [] # idx, acc, occupied
+stack = [] # nxt_idx, cur_acc
 
-# start point
+# 첫 업무
 for idx, (need, profit) in enumerate(candidates):
-    if can_handle(idx, need, n, []):
-        # 미선택
-        stack.append( (idx, 0, []) )
-
-        # 선택
-        nxt_occ = []
-        for i in range(idx, idx + need):
-            nxt_occ.append(i)
-        stack.append( (idx, profit, nxt_occ) )
-        
+    if idx + need - 1 < n:
+        stack.append((idx + 1, 0)) # 미선택
+        stack.append((idx + need, profit)) # 선택
         break
 # print('init stack', stack)
 
 while stack:
-    cur_idx, cur_acc, cur_occupied = stack.pop()
+    nxt_idx, cur_acc = stack.pop()
 
-    # 모두 검토한 경우
-    if cur_idx == n - 1:
+    if nxt_idx == n:
         answer = max(answer, cur_acc)
         continue
 
-    # 다음 옵션 미선택
-    nxt_idx = cur_idx + 1
     nxt_need, nxt_profit = candidates[nxt_idx]
-    stack.append( (nxt_idx, cur_acc, cur_occupied) )
-    
-    # 기간 내 처리 가능한 경우
-    if can_handle(nxt_idx, nxt_need, n, cur_occupied):
-        # 다음 옵션 선택
-        nxt_occupied = [*cur_occupied]
-        for i in range(nxt_idx, nxt_idx + nxt_need):
-            nxt_occupied.append(i)
 
-        stack.append( (nxt_idx, cur_acc + nxt_profit, nxt_occupied) )
-        # print('\nstack', stack)
+    if nxt_idx + nxt_need - 1 < n:
+        stack.append((nxt_idx + 1, cur_acc)) # 미선택
+        stack.append((nxt_idx + nxt_need, cur_acc + nxt_profit)) # 선택
+    else:
+        stack.append((nxt_idx + 1, cur_acc)) # 미선택
+    # print('stack', stack)
 
 print(answer)
