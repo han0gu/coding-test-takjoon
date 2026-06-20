@@ -61,6 +61,21 @@ for count in counts:
         return answer
 ```
 
+## Gemini 리뷰 반영
+
+Gemini는 위 반복 구조에서 `answer`를 직접 1씩 증가시키는 대신 `enumerate(counts, 1)`을 사용할 수 있다고 피드백했다.
+
+```python
+for answer, count in enumerate(counts, 1):
+    k -= count
+    if k <= 0:
+        return answer
+```
+
+`enumerate`의 두 번째 인자는 시작 인덱스를 뜻한다. 따라서 `enumerate(counts, 1)`에서 `answer`는 1, 2, 3, ... 순서로 증가하고, 현재까지 선택한 귤 크기 종류 수를 바로 나타낸다.
+
+이렇게 쓰면 별도의 `answer = 0` 초기화와 `answer += 1` 증가 코드가 사라져 반복문의 역할이 더 간결해진다.
+
 ## 정리
 
 이 문제의 핵심은 다음과 같다.

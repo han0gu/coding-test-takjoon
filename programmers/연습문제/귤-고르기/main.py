@@ -4,10 +4,8 @@ from collections import Counter
 def solution(k, tangerine):
     counts = sorted(Counter(tangerine).values(), reverse=True)
 
-    answer = 0
-    for count in counts:
+    for answer, count in enumerate(counts, 1):
         k -= count
-        answer += 1
 
         if k <= 0:
             return answer
