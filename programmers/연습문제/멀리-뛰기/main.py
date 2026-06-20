@@ -13,9 +13,7 @@ def solution(n):
     
     a = 1
     b = 2
-    for i in range(3, n + 1):
-        tmp = b
-        b += a
-        a = tmp
+    for _ in range(3, n + 1):
+        a, b = b, (a + b) % 1234567
         
-    return b % 1234567
+    return b
