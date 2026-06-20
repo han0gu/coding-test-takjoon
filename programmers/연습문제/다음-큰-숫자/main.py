@@ -1,10 +1,13 @@
 def solution(n):
-    b = str(bin(n)[2:])
-    b_one_cnt = len([c for c in b if c == '1'])
+    b = bin(n)[2:]
+    b_one_cnt = b.count('1')
     
-    for i in range(n + 1, n * 4):
-        b_i = str(bin(i)[2:])
-        b_i_one_cnt = len([c for c in b_i if c == '1'])
+    i = n + 1
+    while True:
+        b_i = bin(i)[2:]
+        b_i_one_cnt = b_i.count('1')
         
         if b_one_cnt == b_i_one_cnt:
-            return int(b_i, 2)
+            return i
+        
+        i += 1
