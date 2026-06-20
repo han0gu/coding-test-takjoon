@@ -1,10 +1,11 @@
 def solution(s):
     
-    stack = [s[0]]
+    stack = []
     
-    for c in s[1:]:
+    for c in s:
         if not stack:
             stack.append(c)
+            continue
         
         head = stack[-1]
         if head == c:
